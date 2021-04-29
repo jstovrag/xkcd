@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Main project margins -->
+    <dimen name="margin_default">16dp</dimen>
+
+    <!-- Fonts -->
+    <dimen name="txt_h1">20sp</dimen>
+</resources>

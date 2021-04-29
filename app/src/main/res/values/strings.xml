@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">XKCD</string>
+
+    <!-- Splash activity -->
+    <string name="welcome_message">Welcome to the awesome XKCD Comic app!</string>
+
+    <!-- Base errors -->
+    <string name="network_error_title">No Internet connection</string>
+    <string name="network_error_description">Please connect device to the internet.</string>
+    <string name="default_error_title">Something went wrong.</string>
+    <string name="err_technical">A technical error has occurred. Please try again later.</string>
+    <string name="default_error_message">Something went wrong.</string>
 </resources>
