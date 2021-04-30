@@ -1,5 +1,6 @@
 package com.xk.cd.data.di.api
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.xk.cd.data.base.config.NetworkConfig
 import okhttp3.OkHttpClient
@@ -13,12 +14,12 @@ import javax.inject.Inject
 class RetrofitApiFactory @Inject constructor(
     private val okHttpClient: OkHttpClient,
     private val networkConfig: NetworkConfig
-) :
-    ApiFactory {
-    override fun <T> buildApi(type: Class<T>?): T {
+) : ApiFactory {
+
+    override fun <T> buildApi(type: Class<T>): T {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(networkConfig.baseUrl)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -28,7 +29,7 @@ class RetrofitApiFactory @Inject constructor(
     override fun buildRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(networkConfig.baseUrl)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

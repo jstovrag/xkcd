@@ -9,6 +9,6 @@ interface ApiFactory {
     /**
      * Should produce instance of T
      */
-    fun <T> buildApi(type: Class<T>?): T
+    fun <T> buildApi(type: Class<T>): T
     fun buildRetrofit(): Retrofit?
 }

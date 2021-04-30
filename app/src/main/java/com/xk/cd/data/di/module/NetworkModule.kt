@@ -1,17 +1,20 @@
 package com.xk.cd.data.di.module
 
-import com.google.gson.Gson
 import com.xk.cd.data.base.config.DefaultNetworkConfig
 import com.xk.cd.data.base.config.NetworkConfig
 import com.xk.cd.data.di.api.ApiFactory
-import com.xk.cd.data.store.httpcache.HttpCache
+import com.xk.cd.data.di.api.RetrofitApiFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
-import okhttp3.*
-import java.util.*
+import okhttp3.Authenticator
+import okhttp3.Dispatcher
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 /**
@@ -27,103 +30,112 @@ import javax.inject.Singleton
  */
 @Module
 abstract class NetworkModule {
-
-    @Binds
-    @Singleton
-    abstract fun provideDefaultRetrofitApiFactory(apiFactory: ApiFactory): ApiFactory
-
-    @Binds
-    @Singleton
-    abstract fun provideDefaultOkHttpClient(okHttpClient: OkHttpClient): OkHttpClient
-
-    @Binds
-    @Singleton
-    abstract fun provideDefaultNetworkConfig(defaultNetworkConfig: DefaultNetworkConfig): NetworkConfig?
-
+    @Module
     companion object {
+        @Provides
+        @Singleton
+        @Authenticated(false)
+        @JvmStatic
+        fun provideAuthenticator(): Authenticator {
+            return Authenticator.NONE
+        }
 
-//        @Provides
-//        @Singleton
-//        fun provideUnAuthenticatedOkHttpClient(
-//            networkConfig: NetworkConfig,
-//            authenticator: Authenticator,
-//            dispatcher: Dispatcher,
-//            unauthenticatedInterceptors: Set<Interceptor?>?,
-//            interceptors: Set<Interceptor?>?,
-//            httpCache: HttpCache
-//        ): OkHttpClient {
-//            val allInterceptors: MutableSet<Interceptor> = HashSet()
-//            allInterceptors.addAll(interceptors)
-//            allInterceptors.addAll(unauthenticatedInterceptors)
-//            return createOkHttpClient(
-//                networkConfig,
-//                authenticator,
-//                dispatcher,
-//                allInterceptors,
-//                httpCache
-//            )
-//        }
-//
-//        @Provides
-//        @Singleton
-//        fun provideAuthenticatedOkHttpClient(
-//            networkConfig: NetworkConfig,
-//            authenticator: Authenticator,
-//            dispatcher: Dispatcher,
-//            authenticatedInterceptors: Set<Interceptor?>?,
-//            interceptors: Set<Interceptor?>?,
-//            httpCache: HttpCache
-//        ): OkHttpClient {
-//            val allInterceptors: MutableSet<Interceptor> = HashSet()
-//            allInterceptors.addAll(interceptors)
-//            allInterceptors.addAll(authenticatedInterceptors)
-//            return createOkHttpClient(
-//                networkConfig,
-//                authenticator,
-//                dispatcher,
-//                allInterceptors,
-//                httpCache
-//            )
-//        }
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun provideDispatcher(): Dispatcher {
+            return Dispatcher()
+        }
+
+        @Provides
+        @Singleton
+        @IntoSet
+        @JvmStatic
+        fun provideLoggingInterceptor(): Interceptor {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            return interceptor
+        }
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        @Authenticated(false)
+        fun provideUnAuthenticatedOkHttpClient(
+            networkConfig: NetworkConfig,
+            @Authenticated(false)
+            dispatcher: Dispatcher
+        ): OkHttpClient = createOkHttpClient(
+            networkConfig,
+            dispatcher
+        )
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        @Authenticated(true)
+        fun provideAuthenticatedOkHttpClient(
+            networkConfig: NetworkConfig,
+            dispatcher: Dispatcher
+        ): OkHttpClient = createOkHttpClient(
+            networkConfig,
+            dispatcher
+        )
 
         private fun createOkHttpClient(
             networkConfig: NetworkConfig,
-            authenticator: Authenticator,
-            dispatcher: Dispatcher,
-            interceptors: Set<Interceptor>,
-            httpCache: HttpCache
+            dispatcher: Dispatcher
         ): OkHttpClient {
-            val builder = OkHttpClient.Builder()
-
-            builder.authenticator(authenticator)
+            val builder: OkHttpClient.Builder = OkHttpClient.Builder()
                 .dispatcher(dispatcher)
-            for (interceptor in interceptors) {
-                builder.addInterceptor(interceptor)
-            }
+
+            builder.addInterceptor(provideLoggingInterceptor())
+
             return builder
                 .connectTimeout(networkConfig.connectTimeoutInMs, TimeUnit.MILLISECONDS)
                 .readTimeout(networkConfig.readTimeoutInMs, TimeUnit.MILLISECONDS)
                 .writeTimeout(networkConfig.writeTimeoutInMs, TimeUnit.MILLISECONDS)
-                .cache(httpCache.getCache())
                 .build()
         }
 
-//        @Provides
-//        @Singleton
-//        fun provideAuthenticatedRetrofitApiFactory(
-//            okHttpClient: OkHttpClient?,
-//            networkConfig: NetworkConfig?
-//        ): ApiFactory {
-//            return RetrofitApiFactory(okHttpClient, networkConfig)
-//        }
+        @Provides
+        @Singleton
+        @JvmStatic
+        @Authenticated(true)
+        fun provideAuthenticatedRetrofitApiFactory(
+            @Authenticated(true) okHttpClient: OkHttpClient,
+            networkConfig: NetworkConfig
+        ): ApiFactory = RetrofitApiFactory(okHttpClient, networkConfig)
 
-//        @Provides
-//        @Singleton
-//        fun provideUnauthenticatedRetrofitApiFactory(
-//            okHttpClient: OkHttpClient?,
-//            networkConfig: NetworkConfig?
-//        ): ApiFactory {
-//            return RetrofitApiFactory(okHttpClient, networkConfig)
-//        }
+        @Provides
+        @Singleton
+        @JvmStatic
+        @Authenticated(false)
+        fun provideUnauthenticatedRetrofitApiFactory(
+            @Authenticated(false) okHttpClient: OkHttpClient,
+            networkConfig: NetworkConfig
+        ): ApiFactory = RetrofitApiFactory(okHttpClient, networkConfig)
     }
+
+//    @Multibinds
+//    @Singleton
+//    @Authenticated(false)
+//    abstract fun bindEmptyUnauthenticatedInterceptors(): Set<@JvmSuppressWildcards Interceptor>
+
+    @Binds
+    @Singleton
+    abstract fun provideDefaultRetrofitApiFactory(@Authenticated(true) apiFactory: ApiFactory): ApiFactory
+
+    @Binds
+    @Singleton
+    abstract fun provideDefaultOkHttpClient(@Authenticated(true) okHttpClient: OkHttpClient): OkHttpClient
+
+    @Binds
+    @Singleton
+    abstract fun provideDefaultNetworkConfig(defaultNetworkConfig: DefaultNetworkConfig): NetworkConfig
 }
+
+@Qualifier
+@MustBeDocumented
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Authenticated(val isAuthenticated: Boolean)

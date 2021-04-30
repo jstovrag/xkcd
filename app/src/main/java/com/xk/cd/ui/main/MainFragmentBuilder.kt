@@ -9,5 +9,5 @@ abstract class MainFragmentBuilder {
 
     @FragmentScope
     @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun provideMainFragment(): MainFragment?
+    abstract fun provideMainFragment(): MainFragment
 }

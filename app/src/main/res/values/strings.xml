@@ -10,4 +10,15 @@
     <string name="default_error_title">Something went wrong.</string>
     <string name="err_technical">A technical error has occurred. Please try again later.</string>
     <string name="default_error_message">Something went wrong.</string>
+
+    <!-- MainFragment -->
+    <string name="comic_nav_next">Next</string>
+    <string name="comic_nav_prev">Prev</string>
+    <string name="comic_nav_first">|&lt;</string>
+    <string name="comic_nav_last">&gt;|</string>
+    <string name="comic_nav_random">?</string>
+    <string name="share">Share</string>
+
+    <string name="comic_date">#%s (%s/%s/%s)</string>
+
 </resources>

@@ -19,9 +19,9 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [SplashModule::class])
-    abstract fun provideSplashActivity(): SplashActivity?
+    abstract fun provideSplashActivity(): SplashActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class, MainFragmentBuilder::class])
-    abstract fun provideMainActivity(): MainActivity?
+    abstract fun provideMainActivity(): MainActivity
 }

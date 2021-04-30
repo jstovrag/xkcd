@@ -8,6 +8,16 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
 
+        <ImageView
+            style="@style/Heading1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:gravity="center"
+            android:src="@drawable/xkcd"
+            android:text="@string/welcome_message" />
+
         <TextView
             style="@style/Heading1"
             android:layout_width="wrap_content"

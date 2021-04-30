@@ -49,8 +49,14 @@ abstract class BaseBoundFragment<VIEW_MODEL_TYPE : BaseViewModel> : BaseFragment
             return null
         }
 
-    var viewModelFactory: ViewModelProvider.Factory? = null
-        @Inject set
+    /**
+     * Use this if you need to get activity view model
+     * (ViewModelProviders.of(activity, viewModelFactory).get(activityViewModelClass))
+     *
+     * That way it will use the injected instance of ViewModel
+     */
+    @Inject
+    protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModelType: VIEW_MODEL_TYPE
     private var progressDialog: ProgressDialog? = null

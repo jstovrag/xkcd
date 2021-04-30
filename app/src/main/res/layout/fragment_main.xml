@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:filterTouchesWhenObscured="true">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.xk.cd.ui.main.MainFragmentViewModel"/>
+            type="com.xk.cd.ui.main.MainFragmentViewModel" />
     </data>
 
     <RelativeLayout
@@ -13,9 +15,127 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <Button
+            android:id="@+id/button_share"
+            style="@style/buttonComicNavigationStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome" />
+            android:layout_alignParentStart="true"
+            android:onClick="@{() -> viewModel.shareComicClick()}"
+            android:text="@string/share" />
+
+        <ScrollView
+            android:id="@+id/container_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/container_comic_navigation_buttons"
+            android:layout_below="@+id/button_share"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_comic_title"
+                    style="@style/Heading1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:text="@{viewModel.currentComic.title}"
+                    tools:text="Title" />
+
+                <TextView
+                    android:id="@+id/text_comic_date_and_number"
+                    style="@style/Heading3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_comic_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:text="@{@string/comic_date(viewModel.currentComic.num, viewModel.currentComic.day, viewModel.currentComic.month, viewModel.currentComic.year)}"
+                    tools:text="12/1/2012" />
+
+                <TextView
+                    android:id="@+id/text_comic_transcript"
+                    style="@style/Heading2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_comic_date_and_number"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginHorizontal="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:text="@{viewModel.currentComic.transcript}"
+                    tools:text="Transcript" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text_comic_transcript"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/margin_default"
+                    android:minHeight="200dp"
+                    android:src="@{viewModel.currentComic.img}"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/container_comic_navigation_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <Button
+                android:id="@+id/nav_first"
+                style="@style/buttonComicNavigationStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.navFirstClick()}"
+                android:text="@string/comic_nav_first" />
+
+            <Button
+                android:id="@+id/nav_prev"
+                style="@style/buttonComicNavigationStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.navPrevClick()}"
+                android:text="@string/comic_nav_prev" />
+
+            <Button
+                android:id="@+id/nav_random"
+                style="@style/buttonComicNavigationStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.randomClick()}"
+                android:text="@string/comic_nav_random" />
+
+            <Button
+                android:id="@+id/nav_next"
+                style="@style/buttonComicNavigationStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.navNextClick()}"
+                android:text="@string/comic_nav_next" />
+
+            <Button
+                android:id="@+id/nav_last"
+                style="@style/buttonComicNavigationStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.navLastClick()}"
+                android:text="@string/comic_nav_last" />
+        </LinearLayout>
     </RelativeLayout>
 </layout>

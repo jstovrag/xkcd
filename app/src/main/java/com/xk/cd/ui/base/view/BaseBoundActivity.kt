@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.xk.cd.ui.base.view.BoundView
 import com.xk.cd.ui.base.viewmodel.BaseViewModel
 import com.xk.cd.R
 import javax.inject.Inject
@@ -17,11 +16,10 @@ abstract class BaseBoundActivity<VIEW_MODEL_TYPE : BaseViewModel> : BaseActivity
     private var progressDialog: ProgressDialog? = null
     private lateinit var viewModelType: VIEW_MODEL_TYPE
 
-    var viewModelFactory: ViewModelProvider.Factory? = null
-        @Inject set
+    @Inject
+    protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override val viewModel: VIEW_MODEL_TYPE
-        get() = viewModelType
+    final override lateinit var viewModel: VIEW_MODEL_TYPE
 
     /**
      * Prepares viewmodel before inflating
@@ -33,7 +31,7 @@ abstract class BaseBoundActivity<VIEW_MODEL_TYPE : BaseViewModel> : BaseActivity
         viewModelType =
             ViewModelProvider(
                 this,
-                viewModelFactory!!
+                viewModelFactory
             ).get(viewModelClass as Class<VIEW_MODEL_TYPE>)
         lifecycle.addObserver(viewModelType)
     }

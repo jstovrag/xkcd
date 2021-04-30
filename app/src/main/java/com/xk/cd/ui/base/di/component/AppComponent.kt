@@ -1,6 +1,7 @@
 package com.xk.cd.ui.base.di.component
 
 import com.xk.cd.App
+import com.xk.cd.data.comic.ComicDataModule
 import com.xk.cd.data.di.module.CacheModule
 import com.xk.cd.data.di.module.NetworkModule
 import com.xk.cd.ui.base.di.module.ActivityBuilder
@@ -23,12 +24,14 @@ import javax.inject.Singleton
 
         // Data
         CacheModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        ComicDataModule::class
     ]
 )
 
 @Singleton
 interface AppComponent : AndroidInjector<App> {
+
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<App>()
 }

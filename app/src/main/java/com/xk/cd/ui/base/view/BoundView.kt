@@ -5,7 +5,7 @@ import com.xk.cd.ui.base.viewmodel.BaseViewModel
 /**
  * Represents a View that can be bound to a ViewModel
  */
-interface BoundView<VIEW_MODEL_TYPE : BaseViewModel?> {
+interface BoundView<VIEW_MODEL_TYPE : BaseViewModel> {
     /**
      * Provides name of view model (BR.name)
      */

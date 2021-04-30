@@ -8,10 +8,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class ErrorUtils @Inject constructor(
-    apiFactory: ApiFactory
+    private val apiFactory: ApiFactory
 ) {
-    private val apiFactory: ApiFactory = apiFactory
-
     fun parseError(response: Response<*>): APIError {
         val apiError = mapResponseBodyToApiError(response)
         if (apiError != null) {

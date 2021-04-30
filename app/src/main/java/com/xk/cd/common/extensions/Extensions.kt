@@ -1,5 +1,8 @@
 package com.xk.cd.common.extensions
 
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import com.xk.cd.data.base.error.AppException
@@ -25,4 +28,16 @@ inline fun <reified T> Response<T>.asBody(errorMapper: ErrorUtils): T {
             body() ?: T::class.java.newInstance()
     }
     throw AppException(errorMapper.parseError(this))
+}
+
+fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T) -> Unit) {
+    this.observe(owner, Observer { item ->
+        if (item != null) observer(item)
+    })
+}
+
+fun <T> LiveData<T>.observeNullable(owner: LifecycleOwner, observer: (T?) -> Unit) {
+    this.observe(owner, Observer { item ->
+        observer(item)
+    })
 }
