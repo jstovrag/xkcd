@@ -16,7 +16,7 @@
     <string name="comic_nav_prev">Prev</string>
     <string name="comic_nav_first">|&lt;</string>
     <string name="comic_nav_last">&gt;|</string>
-    <string name="comic_nav_random">/?</string>
+    <string name="comic_nav_random">?</string>
     <string name="share">Share</string>
     <string name="subscribe_for_newsletter">Subscribe for newsletter</string>
     <string name="favorite">Favorite</string>

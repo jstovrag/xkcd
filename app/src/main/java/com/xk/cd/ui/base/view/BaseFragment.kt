@@ -2,6 +2,7 @@ package com.xk.cd.ui.base.view
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,8 +65,9 @@ abstract class BaseFragment : DaggerFragment() {
 
                 override fun onAnimationEnd(animation: Animation) {
                     if (view != null) {
-                        Handler().postDelayed({
-                            ViewCompat.setTranslationZ(view!!,
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            ViewCompat.setTranslationZ(
+                                view!!,
                                 startZ
                             )
                         }, 100)

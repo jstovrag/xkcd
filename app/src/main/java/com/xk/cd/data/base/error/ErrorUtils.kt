@@ -15,8 +15,7 @@ class ErrorUtils @Inject constructor(
         if (apiError != null) {
             return apiError
         }
-
-        return APIError(response.raw().code())
+        return APIError(response.raw().code)
     }
 
     private fun mapResponseBodyToApiError(response: Response<*>): APIError? {
@@ -25,7 +24,7 @@ class ErrorUtils @Inject constructor(
                 apiFactory.buildRetrofit()!!.responseBodyConverter(
                     APIError::class.java, arrayOfNulls<Annotation>(0)
                 )
-            val error = converter.convert(response.errorBody())
+            val error = converter.convert(response.errorBody()!!)
             if (error != null) {
                 error.setErrorCode(response.code())
                 error

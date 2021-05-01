@@ -34,10 +34,10 @@ annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 @Module
 abstract class ViewModelFactoryModule {
+
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    @Multibinds
     @Singleton
     abstract fun bindViewModelProviders(): Map<Class<out ViewModel>, ViewModel>
 }

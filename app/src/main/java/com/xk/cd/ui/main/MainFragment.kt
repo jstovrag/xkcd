@@ -6,10 +6,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import com.xk.cd.BR
-import com.xk.cd.BuildConfig
 import com.xk.cd.R
-import com.xk.cd.common.extensions.observe
-import com.xk.cd.common.extensions.observeNullable
 import com.xk.cd.databinding.FragmentMainBinding
 import com.xk.cd.ui.base.view.BaseBoundFragment
 
@@ -45,7 +42,7 @@ class MainFragment : BaseBoundFragment<MainFragmentViewModel>(), SearchView.OnQu
         openLink.observe(viewLifecycleOwner) {
             loadCustomTabForSite(it)
         }
-        comicAddedToFavoriteList.observeNullable(viewLifecycleOwner) {
+        comicAddedToFavoriteList.observe(viewLifecycleOwner) {
             Toast.makeText(
                 context,
                 getString(R.string.comic_added_to_favorite_list),

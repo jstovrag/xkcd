@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xk.cd.BR
 import com.xk.cd.R
-import com.xk.cd.common.extensions.observe
 import com.xk.cd.databinding.FragmentFavoriteComicsBinding
 import com.xk.cd.ui.base.view.BaseBoundFragment
 

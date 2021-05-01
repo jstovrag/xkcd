@@ -1,13 +1,12 @@
 package com.xk.cd.data.comic
 
 import com.xk.cd.common.extensions.asBody
-import com.xk.cd.data.BaseRepository
 import com.xk.cd.data.base.error.ErrorUtils
 import com.xk.cd.data.models.comic.Comic
-import com.xk.cd.ui.base.DispachersProvider
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,10 +14,7 @@ import javax.inject.Singleton
 class ComicRepositoryImpl @Inject constructor(
     private val comicApi: ComicApi,
     private val errorMapper: ErrorUtils
-//    dispatcher: DispachersProvider
-) :
-//    BaseRepository(dispatcher),
-    ComicRepository {
+) : ComicRepository {
 
     override suspend fun getLastComic(): Comic {
         return comicApi.getLastComicAsync().await().asBody(errorMapper)

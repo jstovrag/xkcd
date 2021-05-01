@@ -17,6 +17,7 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class ActivityBuilder {
+
     @ActivityScope
     @ContributesAndroidInjector(modules = [SplashModule::class])
     abstract fun provideSplashActivity(): SplashActivity

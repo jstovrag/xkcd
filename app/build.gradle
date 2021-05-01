@@ -2,7 +2,6 @@ import java.util.function.BiConsumer
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 apply plugin: "androidx.navigation.safeargs"
@@ -130,8 +129,8 @@ dependencies {
     implementation "androidx.multidex:multidex:$multiDexVersion"
 
     // Networking
-    implementation "com.squareup.okhttp3:okhttp:$okhttp3Version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp4Version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp4Version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
@@ -150,7 +149,7 @@ dependencies {
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
 

@@ -1,6 +1,6 @@
 package com.xk.cd.data
 
-import com.xk.cd.ui.base.DispachersProvider
+import com.xk.cd.ui.base.DispatchersProvider
 
-abstract class BaseRepository(protected val dispatcher: DispachersProvider)
+abstract class BaseRepository(protected val dispatcher: DispatchersProvider)
 

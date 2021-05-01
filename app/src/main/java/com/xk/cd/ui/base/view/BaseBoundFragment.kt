@@ -11,20 +11,18 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
-import com.xk.cd.data.base.error.BaseError
-import com.xk.cd.data.base.error.DefaultError
-import com.xk.cd.ui.base.NavigationCommand.*
-import com.xk.cd.data.base.error.NetworkError
-import com.xk.cd.data.base.error.ServerError
-import com.xk.cd.ui.base.view.BoundView
-import com.xk.cd.ui.base.viewmodel.BaseViewModel
 import com.xk.cd.R
 import com.xk.cd.common.extensions.popBackStack
 import com.xk.cd.common.helpers.IOnBackPressed
+import com.xk.cd.data.base.error.BaseError
+import com.xk.cd.data.base.error.DefaultError
+import com.xk.cd.data.base.error.NetworkError
+import com.xk.cd.data.base.error.ServerError
+import com.xk.cd.ui.base.NavigationCommand.*
+import com.xk.cd.ui.base.viewmodel.BaseViewModel
 import com.xk.cd.ui.main.MainActivity
 import javax.inject.Inject
 
@@ -92,7 +90,8 @@ abstract class BaseBoundFragment<VIEW_MODEL_TYPE : BaseViewModel> : BaseFragment
 
     fun pushViewBelowStatusBar(view: View) {
         ViewCompat.requestApplyInsets(requireView())
-        ViewCompat.setOnApplyWindowInsetsListener(view
+        ViewCompat.setOnApplyWindowInsetsListener(
+            view
         ) { v: View, insets: WindowInsetsCompat ->
             (v.layoutParams as ViewGroup.MarginLayoutParams).topMargin = insets.systemWindowInsetTop
             insets.consumeSystemWindowInsets()

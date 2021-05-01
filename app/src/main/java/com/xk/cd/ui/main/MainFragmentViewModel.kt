@@ -30,7 +30,7 @@ class MainFragmentViewModel @Inject constructor(
     val currentComic: LiveData<Comic>
         get() = _currentComic
 
-    private val _comicDirectUrl = MutableLiveData<String>()
+    private val _comicDirectUrl = SingleLiveEvent<String>()
     val comicDirectUrl: LiveData<String>
         get() = _comicDirectUrl
 
@@ -84,7 +84,7 @@ class MainFragmentViewModel @Inject constructor(
     }
 
     fun shareComicClick() {
-        _comicDirectUrl.value = _currentComic.value?.img
+        _comicDirectUrl.value = _currentComic.value?.img!!
     }
 
     fun favoriteClick() {

@@ -12,7 +12,6 @@ object AndroidSchedulingModule {
 
     @Singleton
     @Provides
-    @JvmStatic
     fun provideAndroidSchedulingProvider(): SchedulingProvider = object : SchedulingProvider {
         override fun io(): Scheduler = Schedulers.io()
 

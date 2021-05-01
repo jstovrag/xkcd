@@ -19,12 +19,6 @@ object BindingAdapters {
         view.visibility = if (visible == true) View.VISIBLE else View.INVISIBLE
     }
 
-    @BindingAdapter("android:text")
-    @JvmStatic
-    fun setText(textView: TextView, resId: Int) {
-        if (resId != 0) textView.text = textView.context.resources.getString(resId)
-    }
-
     @JvmStatic
     @BindingAdapter("android:src")
     fun loadImage(view: ImageView, url: String?) {

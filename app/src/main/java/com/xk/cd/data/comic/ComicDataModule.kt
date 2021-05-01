@@ -13,11 +13,9 @@ abstract class ComicDataModule {
     @Singleton
     abstract fun provideComicRepository(comicRepositoryImpl: ComicRepositoryImpl): ComicRepository
 
-    @Module
     companion object {
         @Provides
         @Singleton
-        @JvmStatic
         fun providesComicApi(apiFactory: ApiFactory): ComicApi =
             apiFactory.buildApi(ComicApi::class.java)
     }

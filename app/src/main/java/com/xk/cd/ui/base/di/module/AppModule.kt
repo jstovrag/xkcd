@@ -12,6 +12,7 @@ import javax.inject.Singleton
  */
 @Module
 internal abstract class AppModule {
+
     @Binds
     @Singleton
     abstract fun provideApplication(app: App): Application

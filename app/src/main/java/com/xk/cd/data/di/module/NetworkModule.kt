@@ -30,19 +30,17 @@ import javax.inject.Singleton
  */
 @Module
 abstract class NetworkModule {
-    @Module
+
     companion object {
         @Provides
         @Singleton
         @Authenticated(false)
-        @JvmStatic
         fun provideAuthenticator(): Authenticator {
             return Authenticator.NONE
         }
 
         @Provides
         @Singleton
-        @JvmStatic
         fun provideDispatcher(): Dispatcher {
             return Dispatcher()
         }
@@ -50,7 +48,6 @@ abstract class NetworkModule {
         @Provides
         @Singleton
         @IntoSet
-        @JvmStatic
         fun provideLoggingInterceptor(): Interceptor {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -59,7 +56,6 @@ abstract class NetworkModule {
 
         @Provides
         @Singleton
-        @JvmStatic
         @Authenticated(false)
         fun provideUnAuthenticatedOkHttpClient(
             networkConfig: NetworkConfig,
@@ -72,7 +68,6 @@ abstract class NetworkModule {
 
         @Provides
         @Singleton
-        @JvmStatic
         @Authenticated(true)
         fun provideAuthenticatedOkHttpClient(
             networkConfig: NetworkConfig,
@@ -100,7 +95,6 @@ abstract class NetworkModule {
 
         @Provides
         @Singleton
-        @JvmStatic
         @Authenticated(true)
         fun provideAuthenticatedRetrofitApiFactory(
             @Authenticated(true) okHttpClient: OkHttpClient,
@@ -109,7 +103,6 @@ abstract class NetworkModule {
 
         @Provides
         @Singleton
-        @JvmStatic
         @Authenticated(false)
         fun provideUnauthenticatedRetrofitApiFactory(
             @Authenticated(false) okHttpClient: OkHttpClient,

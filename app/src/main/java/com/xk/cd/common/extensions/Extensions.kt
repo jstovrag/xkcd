@@ -37,17 +37,17 @@ inline fun <reified T> Response<T>.asBody(errorMapper: ErrorUtils): T {
     throw AppException(errorMapper.parseError(this))
 }
 
-fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T) -> Unit) {
-    this.observe(owner, Observer { item ->
-        if (item != null) observer(item)
-    })
-}
-
-fun <T> LiveData<T>.observeNullable(owner: LifecycleOwner, observer: (T?) -> Unit) {
-    this.observe(owner, Observer { item ->
-        observer(item)
-    })
-}
+//fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T) -> Unit) {
+//    this.observe(owner, Observer { item ->
+//        if (item != null) observer(item)
+//    })
+//}
+//
+//fun <T> LiveData<T>.observeNullable(owner: LifecycleOwner, observer: (T?) -> Unit) {
+//    this.observe(owner, Observer { item ->
+//        observer(item)
+//    })
+//}
 
 // String
 fun String.getBitmapFromURL(): Single<Bitmap?> {

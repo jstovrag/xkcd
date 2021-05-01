@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class SplashModule {
+
     @Binds
     @IntoMap
     @ViewModelKey(SplashViewModel::class)

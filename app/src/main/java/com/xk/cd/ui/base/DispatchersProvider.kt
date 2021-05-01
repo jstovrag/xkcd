@@ -2,19 +2,19 @@ package com.xk.cd.ui.base
 
 import kotlinx.coroutines.CoroutineDispatcher
 
-interface DispachersProvider {
+interface DispatchersProvider {
     /**
-     * I/O dispacher - Optimized for disk and network IO off the main thread
+     * I/O dispatcher - Optimized for disk and network IO off the main thread
      */
     fun io(): CoroutineDispatcher
 
     /**
-     * Main dispacher - interacts with UI
+     * Main dispatcher - interacts with UI
      */
     fun main(): CoroutineDispatcher
 
     /**
-     * Default dispacher - Optimized for CPU intensive work off the main thread
+     * Default dispatcher - Optimized for CPU intensive work off the main thread
      */
     fun computation(): CoroutineDispatcher
 

@@ -1,6 +1,6 @@
 package com.xk.cd.ui.base.di
 
-import com.xk.cd.ui.base.DispachersProvider
+import com.xk.cd.ui.base.DispatchersProvider
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
@@ -10,17 +10,15 @@ import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
-object DispachersModule {
+object DispatchersModule {
 
     @Provides
-    @JvmStatic
     fun provideViewModelScope(): CoroutineScope
             = CoroutineScope(Dispatchers.Main + SupervisorJob(null))
 
     @Singleton
     @Provides
-    @JvmStatic
-    fun provideDispachers(): DispachersProvider = object : DispachersProvider {
+    fun provideDispatchers(): DispatchersProvider = object : DispatchersProvider {
         override fun io(): CoroutineDispatcher = Dispatchers.IO
 
         override fun main(): CoroutineDispatcher = Dispatchers.Main

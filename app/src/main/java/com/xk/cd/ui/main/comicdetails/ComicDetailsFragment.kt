@@ -2,7 +2,6 @@ package com.xk.cd.ui.main.comicdetails
 
 import com.xk.cd.BR
 import com.xk.cd.R
-import com.xk.cd.common.extensions.observe
 import com.xk.cd.databinding.FragmentComicDetailsBinding
 import com.xk.cd.ui.base.view.BaseBoundFragment
 

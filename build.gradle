@@ -9,7 +9,7 @@ buildscript {
         javaTargetCompatibility = '1.8'
 
         // Kotlin
-        kotlinVersion = '1.3.72'
+        kotlinVersion = '1.4.32'
         navigationSafeArgsPlugin = '1.0.0'
         kotlinCoroutinesVersion = '1.4.2'
         ktxCoroutinesAdapter = '0.9.2'
@@ -22,40 +22,36 @@ buildscript {
         // Android support
         supportLibraryVersion = '28.0.0'
         androidAnnotationVersion = '28.0.0'
-        recyclerViewVersion = '1.1.0'
+        recyclerViewVersion = '1.2.0'
         googleMaterialVersion = '1.3.0'
         androidLifecycleVersion = '1.1.1'
         constraintLayoutVersion = '2.0.4'
         navigationVersion = '2.3.5'
         androidXPreferenceVersion = '1.1.1'
-        fragmentKtxVersion = '1.2.2'
-        lifecycleCommonJava8Version = '2.3.0'
+        fragmentKtxVersion = '1.3.3'
+        lifecycleCommonJava8Version = '2.3.1'
         appcompatVersion = '1.2.0'
         annotationVersion = '1.2.0'
         extensionsVersion = '2.2.0'
-        reactiveStreamsVersion = '2.3.0'
-
-        // Reactive
-        rxJava2Version = '2.1.9'
-        rxAndroidVersion = '2.0.2'
+        reactiveStreamsVersion = '2.3.1'
 
         // Dex
         multiDexVersion = '2.0.1'
 
         // Networking
-        okhttp3Version = '3.10.0'
-        retrofit2Version = '2.3.0'
+        okhttp4Version = '4.9.1'
+        retrofit2Version = '2.9.0'
 
         // Database
         realmVersion = '6.0.2'
 
         // Other libraries
-        gsonVersion = '2.8.2'
+        gsonVersion = '2.8.6'
 
         // Dependency injection
         javaxInjectVersion = '1'
         javaxAnnotationVersion = '1.0'
-        daggerVersion = '2.16'
+        daggerVersion = '2.31.2'
 
         // Testing
         junitVersion = '4.13.2'
@@ -75,8 +71,8 @@ buildscript {
         picassoVersion = '2.71828'
 
         // Reactive
-        rxJava2Version = '2.1.9'
-        rxAndroidVersion = '2.0.2'
+        rxJava2Version = '2.2.21'
+        rxAndroidVersion = '2.1.1'
     }
 
     repositories {
