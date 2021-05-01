@@ -1,13 +1,19 @@
 package com.xk.cd.ui.main
 
 import android.content.Intent
+import android.net.Uri
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import com.xk.cd.BR
+import com.xk.cd.BuildConfig
 import com.xk.cd.R
 import com.xk.cd.common.extensions.observe
+import com.xk.cd.common.extensions.observeNullable
 import com.xk.cd.databinding.FragmentMainBinding
 import com.xk.cd.ui.base.view.BaseBoundFragment
 
-class MainFragment : BaseBoundFragment<MainFragmentViewModel>() {
+class MainFragment : BaseBoundFragment<MainFragmentViewModel>(), SearchView.OnQueryTextListener {
 
     lateinit var binding: FragmentMainBinding
 
@@ -20,12 +26,44 @@ class MainFragment : BaseBoundFragment<MainFragmentViewModel>() {
         pushViewBelowStatusBar(binding.container)
 
         setObservers()
+        setListeners()
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        viewModel.getComic(query.toInt())
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        return false
     }
 
     private fun setObservers() = with(viewModel) {
         comicDirectUrl.observe(viewLifecycleOwner) {
             shareComic(it)
         }
+        openLink.observe(viewLifecycleOwner) {
+            loadCustomTabForSite(it)
+        }
+        comicAddedToFavoriteList.observeNullable(viewLifecycleOwner) {
+            Toast.makeText(
+                context,
+                getString(R.string.comic_added_to_favorite_list),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun setListeners() {
+        binding.run {
+            searchComicByNum.setOnQueryTextListener(this@MainFragment)
+        }
+    }
+
+    private fun loadCustomTabForSite(url: String) {
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
     }
 
     private fun shareComic(comicDirectUrl: String) {

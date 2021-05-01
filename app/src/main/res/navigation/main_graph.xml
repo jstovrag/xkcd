@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
     app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.xk.cd.ui.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_main_to_favorite_comics"
+            app:destination="@id/favoriteComicsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteComicsFragment"
+        android:name="com.xk.cd.ui.main.favoritecomics.FavoriteComicsFragment"
+        android:label="FavoriteComicsFragment"
+        tools:layout="@layout/fragment_favorite_comics">
+        <action
+            android:id="@+id/action_favorite_comics_to_comic_details"
+            app:destination="@id/comicDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/comicDetailsFragment"
+        android:name="com.xk.cd.ui.main.comicdetails.ComicDetailsFragment"
+        android:label="ComicDetailsFragment"
+        tools:layout="@layout/fragment_favorite_comics">
+        <argument
+            android:name="comic"
+            android:defaultValue="@null"
+            app:argType="com.xk.cd.data.models.comic.Comic"
+            app:nullable="true" />
+    </fragment>
 </navigation>

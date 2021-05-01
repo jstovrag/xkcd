@@ -67,7 +67,7 @@ abstract class BaseBoundFragment<VIEW_MODEL_TYPE : BaseViewModel> : BaseFragment
     override fun postInflate(viewDataBinding: ViewDataBinding?) {
         super.postInflate(viewDataBinding)
         viewModelType =
-            ViewModelProvider(this, viewModelFactory!!).get(viewModelClass as Class<VIEW_MODEL_TYPE>)
+            ViewModelProvider(this, viewModelFactory).get(viewModelClass as Class<VIEW_MODEL_TYPE>)
         lifecycle.addObserver(viewModelType)
         if (arguments != null) {
             viewModelType.arguments = requireArguments()
@@ -99,7 +99,7 @@ abstract class BaseBoundFragment<VIEW_MODEL_TYPE : BaseViewModel> : BaseFragment
         }
     }
 
-    fun showProgressDialogActivity() {
+    private fun showProgressDialogActivity() {
         if (progressDialog == null) {
             progressDialog = ProgressDialog(activity, R.style.ProgressDialogStyle)
             progressDialog?.run {
@@ -111,14 +111,14 @@ abstract class BaseBoundFragment<VIEW_MODEL_TYPE : BaseViewModel> : BaseFragment
         }
     }
 
-    fun dismissProgressDialogActivity() {
+    private fun dismissProgressDialogActivity() {
         if (progressDialog != null) {
             if (progressDialog!!.isShowing) progressDialog!!.dismiss()
             progressDialog = null
         }
     }
 
-    protected fun navigateTo(directions: NavDirections?) {
+    private fun navigateTo(directions: NavDirections?) {
         if (navController != null) {
             navController!!.navigate(directions!!)
         }
@@ -128,7 +128,7 @@ abstract class BaseBoundFragment<VIEW_MODEL_TYPE : BaseViewModel> : BaseFragment
      * Attempts to pop the controller's back stack back to a specific destination.
      * If destination is popped and user is navigated to destination true is returned, false otherwise.
      */
-    protected fun navigateBackTo(directions: NavDirections): Boolean {
+    private fun navigateBackTo(directions: NavDirections): Boolean {
         return if (navController != null) {
             navController!!.popBackStack(directions, false)
         } else false

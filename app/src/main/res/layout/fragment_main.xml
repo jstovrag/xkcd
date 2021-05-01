@@ -15,22 +15,85 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <SearchView
+            android:id="@+id/search_comic_by_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:focusable="false"
+            android:iconifiedByDefault="false"
+            android:inputType="number"
+            android:maxLength="10"
+            android:queryBackground="@drawable/background_search_view"
+            android:queryHint="@string/search_comic_by_num"
+            android:singleLine="true"
+            android:textSize="@dimen/txt_size_h3" />
+
+        <Button
+            android:id="@+id/button_newsletter"
+            style="@style/buttonComicNavigationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_comic_by_num"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:onClick="@{() -> viewModel.newsLetterClick()}"
+            android:paddingHorizontal="@dimen/margin_8"
+            android:text="@string/subscribe_for_newsletter" />
+
         <Button
             android:id="@+id/button_share"
             style="@style/buttonComicNavigationStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/button_newsletter"
             android:layout_alignParentStart="true"
+            android:layout_marginHorizontal="@dimen/margin_default"
             android:onClick="@{() -> viewModel.shareComicClick()}"
+            android:paddingHorizontal="@dimen/margin_8"
             android:text="@string/share" />
+
+        <Button
+            android:id="@+id/button_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_newsletter"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:onClick="@{() -> viewModel.favoriteClick()}"
+            android:paddingHorizontal="@dimen/margin_8"
+            android:text="@string/favorite"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_favorite_comic_list"
+            style="@style/buttonComicNavigationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_newsletter"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:onClick="@{() -> viewModel.favoriteComicsClick()}"
+            android:paddingHorizontal="@dimen/margin_8"
+            android:text="@string/favorite_list" />
+
+        <View
+            android:id="@+id/divider_top"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/button_favorite_comic_list"
+            android:layout_marginTop="@dimen/margin_8"
+            android:background="@color/colorMidGrey" />
 
         <ScrollView
             android:id="@+id/container_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/container_comic_navigation_buttons"
-            android:layout_below="@+id/button_share"
-            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_above="@+id/divider_bottom"
+            android:layout_below="@+id/divider_top"
+            android:layout_marginHorizontal="@dimen/margin_default"
             android:fillViewport="true"
             android:scrollbars="none">
 
@@ -57,7 +120,7 @@
                     android:layout_below="@+id/text_comic_title"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/margin_default"
-                    android:text="@{@string/comic_date(viewModel.currentComic.num, viewModel.currentComic.day, viewModel.currentComic.month, viewModel.currentComic.year)}"
+                    android:text="@{@string/comic_num_and_date(viewModel.currentComic.num, viewModel.currentComic.day, viewModel.currentComic.month, viewModel.currentComic.year)}"
                     tools:text="12/1/2012" />
 
                 <TextView
@@ -67,7 +130,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_comic_date_and_number"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginHorizontal="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_default"
                     android:text="@{viewModel.currentComic.transcript}"
                     tools:text="Transcript" />
@@ -77,12 +139,19 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_comic_transcript"
                     android:layout_alignParentBottom="true"
-                    android:layout_margin="@dimen/margin_default"
-                    android:minHeight="200dp"
+                    android:layout_marginTop="@dimen/margin_default"
                     android:src="@{viewModel.currentComic.img}"
                     tools:ignore="ContentDescription" />
             </RelativeLayout>
         </ScrollView>
+
+        <View
+            android:id="@+id/divider_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@+id/container_comic_navigation_buttons"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:background="@color/colorMidGrey" />
 
         <LinearLayout
             android:id="@+id/container_comic_navigation_buttons"

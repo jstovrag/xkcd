@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:filterTouchesWhenObscured="true">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.xk.cd.ui.main.favoritecomics.FavoriteComicsViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_comic_title"
+            style="@style/Heading1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/favorite_comics_title" />
+
+        <TextView
+            android:id="@+id/text_click_for_details"
+            style="@style/Heading3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_comic_title"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_8"
+            android:text="@string/click_on_comic_for_details"/>
+
+        <Button
+            android:id="@+id/button_delete_all_comics"
+            style="@style/buttonComicNavigationStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_click_for_details"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:onClick="@{() -> viewModel.deleteAllComicsClick()}"
+            android:paddingHorizontal="@dimen/margin_8"
+            android:text="@string/delete_favorite_comics"
+            app:visible="@{!viewModel.isFavoriteComicsListEmpty}" />
+
+        <View
+            android:id="@+id/divider_top"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/button_delete_all_comics"
+            android:layout_marginTop="@dimen/margin_default"
+            android:background="@color/colorMidGrey" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_favorite_comics_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider_top"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:focusableInTouchMode="true"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_favorite_comic" />
+
+        <TextView
+            android:id="@+id/text_empty_list"
+            style="@style/Heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_delete_all_comics"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/empty_favorite_comics_list"
+            app:visible="@{viewModel.isFavoriteComicsListEmpty}" />
+    </RelativeLayout>
+</layout>

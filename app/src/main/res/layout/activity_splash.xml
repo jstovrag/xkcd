@@ -2,16 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     android:filterTouchesWhenObscured="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
 
         <ImageView
+            android:id="@+id/image_xkcd"
             style="@style/Heading1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/margin_default"
             android:gravity="center"
@@ -22,9 +25,11 @@
             style="@style/Heading1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/image_xkcd"
             android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_default"
             android:layout_marginHorizontal="@dimen/margin_default"
             android:gravity="center"
             android:text="@string/welcome_message" />
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

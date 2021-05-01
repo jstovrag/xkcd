@@ -4,6 +4,7 @@ import com.xk.cd.App
 import com.xk.cd.data.comic.ComicDataModule
 import com.xk.cd.data.di.module.CacheModule
 import com.xk.cd.data.di.module.NetworkModule
+import com.xk.cd.scheduling.AndroidSchedulingModule
 import com.xk.cd.ui.base.di.module.ActivityBuilder
 import com.xk.cd.ui.base.di.module.AppModule
 import com.xk.cd.ui.base.di.viewmodel.ViewModelFactoryModule
@@ -16,6 +17,7 @@ import javax.inject.Singleton
     modules = [
         // Android
         AndroidSupportInjectionModule::class,
+        AndroidSchedulingModule::class,
 
         // Application
         AppModule::class,

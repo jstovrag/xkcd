@@ -57,8 +57,8 @@ class DialogViewModel {
 
     fun showDialog(context: Context) {
         val builder = AlertDialog.Builder(context)
-        title?.let { builder.setTitle(Html.fromHtml(it)) }
-        titleId?.let { builder.setTitle(Html.fromHtml(context.resources.getString(it))) }
+        title?.let { builder.setTitle(it) }
+        titleId?.let { builder.setTitle(context.resources.getString(it)) }
         if (description != null) {
             builder.setMessage(description)
         } else {

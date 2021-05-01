@@ -16,9 +16,19 @@
     <string name="comic_nav_prev">Prev</string>
     <string name="comic_nav_first">|&lt;</string>
     <string name="comic_nav_last">&gt;|</string>
-    <string name="comic_nav_random">?</string>
+    <string name="comic_nav_random">/?</string>
     <string name="share">Share</string>
+    <string name="subscribe_for_newsletter">Subscribe for newsletter</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorite_list">Fav List &gt;</string>
+    <string name="comic_num_and_date">#%s (%s/%s/%s)</string>
+    <string name="search_comic_by_num">Search comic by number</string>
+    <string name="comic_added_to_favorite_list">This Comic is added to your favorite list!</string>
+    <string name="delete_favorite_comics">Delete List</string>
+    <string name="empty_favorite_comics_list">Your favorite comics list is empty</string>
+    <string name="delete">Delete</string>
 
-    <string name="comic_date">#%s (%s/%s/%s)</string>
-
+    <!-- FavoriteComicsFragment -->
+    <string name="favorite_comics_title">Your Favorite Comics</string>
+    <string name="click_on_comic_for_details">Click on comic for details.</string>
 </resources>

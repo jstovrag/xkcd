@@ -8,7 +8,11 @@ import com.xk.cd.data.base.callback.ClearableCallback
 import com.xk.cd.data.base.error.*
 import com.xk.cd.data.base.error.APIError.ReasonOfError.NETWORK_ERROR
 import com.xk.cd.data.base.error.APIError.ReasonOfError.SERVER_ERROR
+import com.xk.cd.scheduling.SchedulingProvider
 import com.xk.cd.ui.base.NavigationCommand
+import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.*
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -16,7 +20,8 @@ import java.net.UnknownHostException
 import java.util.*
 import javax.inject.Inject
 
-abstract class BaseViewModel : ViewModel(), LifecycleObserver {
+abstract class BaseViewModel(private val schedulingProvider: SchedulingProvider? = null) :
+    ViewModel(), LifecycleObserver {
 
     @Inject
     lateinit var networkHelper: NetworkHelper
@@ -28,6 +33,8 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
         if (exception is AppException) defaultErrorHandler(exception)
         else throw exception
     }
+
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     private val clearableCallbacks = ArrayList<ClearableCallback>()
 
@@ -42,8 +49,6 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     private val _error = MutableLiveData<BaseError?>()
     val error: LiveData<BaseError?>
         get() = _error
-
-    val closeApplication = SingleLiveEvent<Boolean>()
 
     /**
      * This is the scope all coroutines should be started with.
@@ -88,6 +93,13 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     open fun onLifecycleOwnerPause() {
     }
+
+    protected fun <T> Single<T>.asIOCall() = this@asIOCall.observeOn(schedulingProvider?.main())
+        .subscribeOn(schedulingProvider?.io())
+
+    protected fun addDisposable(disposable: Disposable) = compositeDisposable.add(disposable)
+
+    protected fun Disposable.disposeOnClear() = addDisposable(this@disposeOnClear)
 
     fun isLoading(isLoading: Boolean) {
         _loading.postValue(isLoading)

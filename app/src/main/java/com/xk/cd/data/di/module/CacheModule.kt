@@ -1,7 +1,10 @@
 package com.xk.cd.data.di.module
 
 import android.content.Context
+import com.xk.cd.data.models.comic.Comic
+import com.xk.cd.data.store.RealmCache
 import com.xk.cd.data.store.httpcache.HttpCache
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -16,11 +19,11 @@ abstract class CacheModule {
 
     @Module
     companion object {
-//        @Singleton
-//        @Provides
-//        fun provideRealmCache(): RealmCache<ComicLog> {
-//            return RealmCache()
-//        }
+        @Singleton
+        @Provides
+        fun provideRealmCache(): RealmCache<Comic> {
+            return RealmCache()
+        }
 
         @Singleton
         @Provides

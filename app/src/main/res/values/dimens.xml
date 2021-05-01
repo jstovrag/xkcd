@@ -3,6 +3,8 @@
 
     <!-- Main project margins -->
     <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
 
     <!-- Fonts -->
     <dimen name="txt_size_h1">20sp</dimen>
