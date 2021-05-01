@@ -2,9 +2,6 @@ package com.xk.cd.common.extensions
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import com.xk.cd.data.base.error.AppException
@@ -37,18 +34,6 @@ inline fun <reified T> Response<T>.asBody(errorMapper: ErrorUtils): T {
     throw AppException(errorMapper.parseError(this))
 }
 
-//fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T) -> Unit) {
-//    this.observe(owner, Observer { item ->
-//        if (item != null) observer(item)
-//    })
-//}
-//
-//fun <T> LiveData<T>.observeNullable(owner: LifecycleOwner, observer: (T?) -> Unit) {
-//    this.observe(owner, Observer { item ->
-//        observer(item)
-//    })
-//}
-
 // String
 fun String.getBitmapFromURL(): Single<Bitmap?> {
     return Single.fromCallable {
@@ -60,17 +45,4 @@ fun String.getBitmapFromURL(): Single<Bitmap?> {
             return@fromCallable null
         }
     }
-//
-//    return try {
-//        val url = URL(this)
-//        val connection: HttpURLConnection = url
-//            .openConnection() as HttpURLConnection
-//        connection.doInput = true
-//        connection.connect()
-//        val input: InputStream = connection.inputStream
-//        BitmapFactory.decodeStream(input)
-//    } catch (e: IOException) {
-//        e.printStackTrace()
-//        null
-//    }
 }
