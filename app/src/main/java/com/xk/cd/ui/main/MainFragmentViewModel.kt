@@ -44,7 +44,6 @@ class MainFragmentViewModel @Inject constructor(
 
     init {
         getLastComic()
-        RealmHelper.init(App.appContext)
     }
 
     fun navFirstClick() {
