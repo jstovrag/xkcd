@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 apply plugin: "androidx.navigation.safeargs"
-
+apply plugin: "com.google.gms.google-services"
 
 Properties loadProperties(String variant) {
     def props = new Properties()
@@ -156,6 +156,10 @@ dependencies {
     // Reactive
     implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+    // Firebase
+    implementation platform ("com.google.firebase:firebase-bom:31.2.3")
+    implementation "com.google.firebase:firebase-analytics:17.5.0"
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$picassoVersion"
