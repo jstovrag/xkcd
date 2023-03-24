@@ -4,7 +4,7 @@ buildscript {
     // Dependencies and api version in one place
     ext {
         // Language and build tools
-        buildToolsVersion = '4.1.2'
+        buildToolsVersion = '7.0.0'
         javaSourceCompatibility = '1.8'
         javaTargetCompatibility = '1.8'
 
