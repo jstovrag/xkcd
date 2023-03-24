@@ -5,8 +5,8 @@ buildscript {
     ext {
         // Language and build tools
         buildToolsVersion = '7.0.0'
-        javaSourceCompatibility = '1.8'
-        javaTargetCompatibility = '1.8'
+        javaSourceCompatibility = '11'
+        javaTargetCompatibility = '11'
 
         // Kotlin
         kotlinVersion = '1.7.10'
