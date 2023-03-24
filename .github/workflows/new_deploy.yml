@@ -5,7 +5,7 @@ on:
     inputs:
       build_debug_apk:
         type: boolean
-        description: "Deploy for debug"
+        description: "Deploy for debugg"
         default: false
         required: false
   push:
