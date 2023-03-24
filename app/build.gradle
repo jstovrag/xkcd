@@ -70,6 +70,8 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
             for (Map.Entry<String, String> entry : loadPropertiesIntoMap("debug").entrySet()) {
                 buildConfigField "String", entry.key, "\"${entry.value}\""
             }
