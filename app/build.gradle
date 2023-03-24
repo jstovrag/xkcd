@@ -4,8 +4,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
-apply plugin: "androidx.navigation.safeargs"
-apply plugin: "com.google.gms.google-services"
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.firebase.appdistribution'
 
 Properties loadProperties(String variant) {
     def props = new Properties()
