@@ -8,50 +8,51 @@ on:
         description: "Deploy for debug"
         default: false
         required: false
-
-env:
-  INPUT_BUILD_DEBUG_APK: ${{ github.event.inputs.build_debug_apk }}
-  INPUT_BUILD_RELEASE_APK: ${{ github.event.inputs.build_release_apk }}
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Assemble Debug APK
-        if: ${{ env.INPUT_BUILD_DEBUG_APK == 'true' }}
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: -q assembleDebug
-
-      - name: Assemble Release APK
-        if: ${{ env.INPUT_BUILD_RELEASE_APK == 'true' }}
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: -q assembleRelease
-
-      - name: Upload Debug APK to Firebase App Distribution
-        if: ${{ env.INPUT_BUILD_DEBUG_APK == 'true' }}
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{secrets.FIREBASE_APP_ID_DEBUG}}
-          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
-          groups: test-group-debug
-          file: app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Upload Release APK to Firebase App Distribution
-        if: ${{ env.INPUT_BUILD_RELEASE_APK == 'true' }}
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
-          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
-          groups: test-group-release
-          file: app/build/outputs/apk/release/app-release-unsigned.apk
+  push:
+#
+#env:
+#  INPUT_BUILD_DEBUG_APK: ${{ github.event.inputs.build_debug_apk }}
+#  INPUT_BUILD_RELEASE_APK: ${{ github.event.inputs.build_release_apk }}
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: set up JDK 11
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 11
+#
+#      - name: Make gradlew executable
+#        run: chmod +x ./gradlew
+#
+#      - name: Assemble Debug APK
+#        if: ${{ env.INPUT_BUILD_DEBUG_APK == 'true' }}
+#        uses: gradle/gradle-build-action@v2
+#        with:
+#          arguments: -q assembleDebug
+#
+#      - name: Assemble Release APK
+#        if: ${{ env.INPUT_BUILD_RELEASE_APK == 'true' }}
+#        uses: gradle/gradle-build-action@v2
+#        with:
+#          arguments: -q assembleRelease
+#
+#      - name: Upload Debug APK to Firebase App Distribution
+#        if: ${{ env.INPUT_BUILD_DEBUG_APK == 'true' }}
+#        uses: wzieba/Firebase-Distribution-Github-Action@v1
+#        with:
+#          appId: ${{secrets.FIREBASE_APP_ID_DEBUG}}
+#          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
+#          groups: test-group-debug
+#          file: app/build/outputs/apk/debug/app-debug.apk
+#
+#      - name: Upload Release APK to Firebase App Distribution
+#        if: ${{ env.INPUT_BUILD_RELEASE_APK == 'true' }}
+#        uses: wzieba/Firebase-Distribution-Github-Action@v1
+#        with:
+#          appId: ${{secrets.FIREBASE_APP_ID}}
+#          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
+#          groups: test-group-release
+#          file: app/build/outputs/apk/release/app-release-unsigned.apk
