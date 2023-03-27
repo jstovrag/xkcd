@@ -7,7 +7,7 @@ on:
         type: boolean
         description: "Deploy for debug"
         default: false
-        required: false
+        required: falseg
       build_release_apk:
         type: boolean
         description: "Deploy for production"
