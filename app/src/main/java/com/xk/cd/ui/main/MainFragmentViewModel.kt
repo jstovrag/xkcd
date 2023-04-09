@@ -2,11 +2,8 @@ package com.xk.cd.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.xk.cd.App
-import com.xk.cd.BuildConfig
 import com.xk.cd.common.constants.AppConstants.NEWSLETTER_URL
 import com.xk.cd.common.extensions.getBitmapFromURL
-import com.xk.cd.common.helpers.RealmHelper
 import com.xk.cd.data.comic.ComicRepository
 import com.xk.cd.data.models.comic.Comic
 import com.xk.cd.data.store.RealmCache
@@ -83,7 +80,9 @@ class MainFragmentViewModel @Inject constructor(
     }
 
     fun shareComicClick() {
-        _comicDirectUrl.value = _currentComic.value?.img!!
+        _currentComic.value?.img?.let {
+            _comicDirectUrl.value = it
+        }
     }
 
     fun favoriteClick() {

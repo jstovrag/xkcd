@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.google.firebase.appdistribution'
+apply plugin: 'com.google.firebase.appdistribution'
 
 Properties loadProperties(String variant) {
     def props = new Properties()
@@ -75,12 +75,20 @@ android {
             for (Map.Entry<String, String> entry : loadPropertiesIntoMap("debug").entrySet()) {
                 buildConfigField "String", entry.key, "\"${entry.value}\""
             }
+
+            firebaseAppDistribution{
+                serviceCredentialsFile = "$rootDir/app-distribution.json"
+            }
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             for (Map.Entry<String, String> entry : loadPropertiesIntoMap("release").entrySet()) {
                 buildConfigField "String", entry.key, "\"${entry.value}\""
+            }
+
+            firebaseAppDistribution{
+                serviceCredentialsFile = "$rootDir/app-distribution.json"
             }
         }
     }
